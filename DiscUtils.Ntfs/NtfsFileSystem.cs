@@ -328,7 +328,7 @@ namespace DiscUtils.Ntfs
                 DirectoryEntry parentDirEntry = GetDirectoryEntry(parentDirPath);
                 if (parentDirEntry == null || !parentDirEntry.IsDirectory)
                 {
-                    throw new FileNotFoundException("No such file", path);
+                    throw new FileNotFoundException("The file does not exist.", path);
                 }
 
                 Directory parentDir = GetDirectory(parentDirEntry.Reference);
@@ -336,7 +336,7 @@ namespace DiscUtils.Ntfs
                 DirectoryEntry dirEntry = parentDir.GetEntryByName(Utilities.GetFileFromPath(dirEntryPath));
                 if (dirEntry == null || dirEntry.IsDirectory)
                 {
-                    throw new FileNotFoundException("No such file", path);
+                    throw new FileNotFoundException("The file does not exist.", path);
                 }
 
                 File file = GetFile(dirEntry.Reference);
@@ -1616,7 +1616,7 @@ namespace DiscUtils.Ntfs
         /// Creates a directory.
         /// </summary>
         /// <param name="path">The path of the new directory.</param>
-        /// <param name="options">Options controlling attributes of the new Director, or <c>null</c> for defaults.</param>
+        /// <param name="options">Options controlling attributes of the new Directory, or <c>null</c> for defaults.</param>
         public void CreateDirectory(string path, NewFileOptions options)
         {
             using (new NtfsTransaction())
